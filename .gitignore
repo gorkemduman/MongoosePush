@@ -41,3 +41,4 @@ src/APNS-Topics.erl
 
 # Apple... something
 .DS_Store
+.idea

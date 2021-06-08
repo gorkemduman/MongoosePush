@@ -34,14 +34,14 @@ defmodule MongoosePush do
   @type alert :: %{alert_key => atom | String.t() | integer}
   @type data :: %{data_key => term}
 
-  @type service :: :fcm | :apns
+  @type service :: :fcm | :hns | :apns
   @type mode :: :dev | :prod
 
   @type error :: {:generic, :no_matching_pool | :unable_to_connect | :connection_lost | atom}
 
   @doc """
   Push notification defined by `request` to device with `device_id`.
-  `request` has to define at least `:service` type (`:fcm` or `:apns`) and
+  `request` has to define at least `:service` type (`:fcm` or `:apns` or `:hns`) and
   at least one of `:alert` or `:data`. If `alert` is not present, the notification will be send as 'silent'.
   Please refer to yours push notification service provider's documentation for more details on
   silent notifications.

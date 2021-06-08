@@ -1,6 +1,6 @@
 defmodule MongoosePushWeb.Protocols.RequestDecoderHelper do
   def add_optional_fields(push_request, schema) do
-    opt_keys = [:mutable_content, :mode, :priority, :tags, :time_to_live, :topic]
+    opt_keys = [:mutable_content, :mode, :priority, :tags, :time_to_live, :topic, :data]
 
     Enum.reduce(opt_keys, push_request, fn x, acc ->
       case Map.get(schema, x) do
@@ -12,6 +12,7 @@ defmodule MongoosePushWeb.Protocols.RequestDecoderHelper do
 
   def parse_service("apns"), do: :apns
   def parse_service("fcm"), do: :fcm
+  def parse_service("hns"), do: :hns
 
   def maybe_parse_to_atom(:mode, val), do: parse_mode(val)
   def maybe_parse_to_atom(:priority, val), do: parse_priority(val)

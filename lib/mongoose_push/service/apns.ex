@@ -40,6 +40,7 @@ defmodule MongoosePush.Service.APNS do
     |> maybe(:add_badge, alert[:badge])
     |> maybe(:add_category, alert[:click_action])
     |> maybe(:add_sound, alert[:sound])
+    |> maybe(:add_content_available, 1)
     |> add_data(request[:data])
   end
 

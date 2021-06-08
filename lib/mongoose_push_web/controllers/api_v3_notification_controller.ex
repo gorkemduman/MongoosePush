@@ -30,7 +30,7 @@ defmodule MongoosePushWeb.APIv3.NotificationController do
               MongoosePushWeb.Schemas.Request.SendNotification.Deep.MixedNotification,
               MongoosePushWeb.Schemas.Request.SendNotification.Deep.SilentNotification
             ],
-            additionalProperties: false
+            additionalProperties: true
           },
           required: true
         ),
@@ -88,6 +88,8 @@ defmodule MongoosePushWeb.APIv3.NotificationController do
   end
 
   def send(conn = %{body_params: params}, %{device_id: device_id}) do
+
+
     request = MongoosePushWeb.Protocols.RequestDecoder.decode(params)
     result = MongoosePush.Application.backend_module().push(device_id, request)
     {status, payload} = MongoosePush.API.V3.ResponseEncoder.to_status(result)

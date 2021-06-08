@@ -21,7 +21,7 @@ defmodule MongoosePushWeb.Schemas.Request.SendNotification.Deep.Common.Alert do
     },
     required: [:body, :title],
     example: Deep.alert()[:example]["alert"],
-    additionalProperties: false
+    additionalProperties: true
   })
 
   defimpl MongoosePushWeb.Protocols.RequestDecoder,

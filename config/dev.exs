@@ -15,14 +15,26 @@ config :goth, endpoint: "http://fcm-mock:4001"
 config :mongoose_push,
   fcm: [
     default: [
-      endpoint: "localhost",
-      port: 4000,
+      #endpoint: "localhost",
+      #port: 4000,
       appfile: "priv/fcm/token.json",
-      pool_size: 5,
+      pool_size: 1,
       mode: :prod,
       tls_opts: []
     ]
   ]
+
+config :mongoose_push,
+       hns: [
+         hns_default: [
+           appfile: "priv/hns/token.json",
+           pool_size: 1,
+           mode: :prod,
+           grand_type: "client_credentials",
+           ping_interval: nil,
+           tls_opts: []
+         ]
+       ]
 
 config :mongoose_push,
   apns: [
@@ -32,10 +44,10 @@ config :mongoose_push,
         cert: "priv/apns/dev_cert.pem",
         key: "priv/apns/dev_key.pem"
       },
-      endpoint: "localhost",
+      #endpoint: "localhost",
       mode: :dev,
       use_2197: true,
-      pool_size: 5,
+      pool_size: 1,
       tls_opts: []
     ],
     prod: [
@@ -44,10 +56,10 @@ config :mongoose_push,
         cert: "priv/apns/prod_cert.pem",
         key: "priv/apns/prod_key.pem"
       },
-      endpoint: "localhost",
+      #endpoint: "localhost",
       mode: :prod,
       use_2197: true,
-      pool_size: 5,
+      pool_size: 1,
       tls_opts: []
     ]
   ]

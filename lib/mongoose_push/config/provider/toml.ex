@@ -44,6 +44,7 @@ defmodule MongoosePush.Config.Provider.Toml do
     |> update_openapi(toml_config)
     |> update_service(toml_config, :fcm)
     |> update_service(toml_config, :apns)
+    |> update_service(toml_config, :hns)
   end
 
   defp update_logging_level(sysconfig, toml) do
@@ -132,6 +133,17 @@ defmodule MongoosePush.Config.Provider.Toml do
   end
 
   defp parse_service(:fcm, toml) do
+    [
+      endpoint: toml[:connection][:endpoint],
+      port: toml[:connection][:port],
+      appfile: toml[:auth][:appfile],
+      pool_size: toml[:connection][:count] || 5,
+      tags: toml[:tags],
+      mode: :prod
+    ]
+  end
+
+  defp parse_service(:hns, toml) do
     [
       endpoint: toml[:connection][:endpoint],
       port: toml[:connection][:port],

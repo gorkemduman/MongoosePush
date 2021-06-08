@@ -54,7 +54,8 @@ release :mongoose_push do
   set(
     applications: [
       mongoose_push: :permanent,
-      goth: :load
+      goth: :load,
+      huth: :load
     ]
   )
 end

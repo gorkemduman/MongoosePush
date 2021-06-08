@@ -10,7 +10,7 @@ defmodule MongoosePushWeb.Schemas.Request.SendNotification.Deep.AlertNotificatio
     properties: Map.merge(Deep.base()[:properties], Deep.alert()[:properties]),
     required: Deep.base()[:required] ++ Deep.alert()[:required],
     example: Map.merge(Deep.base()[:example], Deep.alert()[:example]),
-    additionalProperties: false
+    additionalProperties: true
   })
 
   defimpl RequestDecoder,

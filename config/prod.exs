@@ -4,6 +4,8 @@ config :mix_docker, image: "mongoose_push"
 
 config :goth, endpoint: {:system, :string, "FCM_AUTH_ENDPOINT", "https://www.googleapis.com"}
 
+config :huth, endpoint: {:system, :string, "HNS_AUTH_ENDPOINT", "https://oauth-login.cloud.huawei.com"}
+
 config :mongoose_push, MongoosePushWeb.Endpoint,
   https: [
     ip: {
@@ -38,6 +40,8 @@ config :mongoose_push, :logging,
 
 config :mongoose_push, fcm_enabled: {:system, :boolean, "PUSH_FCM_ENABLED", true}
 
+config :mongoose_push, hns_enabled: {:system, :boolean, "PUSH_HNS_ENABLED", true}
+
 config :mongoose_push, apns_enabled: {:system, :boolean, "PUSH_APNS_ENABLED", true}
 
 config :mongoose_push,
@@ -53,6 +57,20 @@ config :mongoose_push,
       mode: :prod
     ]
   ]
+
+config :mongoose_push,
+   hns: [
+     hns_default: [
+       endpoint: {:system, :string, "PUSH_HNS_ENDPOINT", nil},
+       port: {:system, :integer, "PUSH_HNS_PORT", nil},
+       appfile: {:system, :string, "PUSH_HNS_APP_FILE", "priv/hns/token.json"},
+       pool_size: {:system, :integer, "PUSH_HNS_POOL_SIZE", 5},
+       mode: :prod,
+       grand_type: "client_credentials",
+       ping_interval: nil,
+       tls_opts: []
+     ]
+   ]
 
 config :mongoose_push,
   apns: [

@@ -10,6 +10,8 @@ defmodule MongoosePush.Application do
   @type fcm_key :: :key | :pool_size | :mode | :endpoint
   @typedoc "Possible keys in APNS config"
   @type apns_key :: :cert | :key | :pool_size | :mode | :endpoint | :use_2197
+  @typedoc "Possible keys in HNS config"
+  @type hns_key :: :key | :pool_size | :mode | :endpoint
 
   @typedoc """
   In FCM `:key` and `:pool_size` are required and `:mode` has to be either `:dev` or `:prod`
@@ -19,9 +21,13 @@ defmodule MongoosePush.Application do
   In APNS `:cert`, `:key` and `:pool_size` are required. `:mode` has to be either `:dev` or `:prod`
   """
   @type apns_config :: [{apns_key, String.t() | atom | integer}]
+  @typedoc """
+  In HNS `:key` and `:pool_size` are required and `:mode` has to be either `:dev` or `:prod`
+  """
+  @type hns_config :: [{hns_key, String.t() | atom | integer}]
 
   @type pool_name :: atom()
-  @type pool_definition :: {pool_name, fcm_config | apns_config}
+  @type pool_definition :: {pool_name, fcm_config | apns_config | hns_config}
 
   @spec start(atom, list(term)) :: {:ok, pid}
   def start(_type, _args) do
@@ -114,10 +120,16 @@ defmodule MongoosePush.Application do
 
         :fcm ->
           [:appfile]
+
+        :hns ->
+          [:appfile]
       end
 
     case service do
       :fcm ->
+        check_paths(config, path_keys)
+
+      :hns ->
         check_paths(config, path_keys)
 
       :apns ->

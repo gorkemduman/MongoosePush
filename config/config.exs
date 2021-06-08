@@ -61,6 +61,7 @@ config :sparrow, Sparrow.PoolsWarden, %{enabled: true}
 
 config :mongoose_push, MongoosePush.Service,
   fcm: MongoosePush.Service.FCM,
+  hns: MongoosePush.Service.HNS,
   apns: MongoosePush.Service.APNS
 
 config :mongoose_push, backend_module: MongoosePush

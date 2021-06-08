@@ -12,7 +12,7 @@ defmodule MongoosePushWeb.Schemas.Request.SendNotification.FlatNotification do
         type: :string,
         description: "Push notification service",
         format: :text,
-        enum: ["fcm", "apns"]
+        enum: ["fcm", "hns", "apns"]
       },
       body: %Schema{type: :string, description: "Body of the notification", format: :text},
       title: %Schema{type: :string, description: "Title of the notification", format: :text},
@@ -44,7 +44,7 @@ defmodule MongoosePushWeb.Schemas.Request.SendNotification.FlatNotification do
       },
       "mode" => "prod"
     },
-    additionalProperties: false
+    additionalProperties: true
   })
 
   defimpl MongoosePushWeb.Protocols.RequestDecoder,
@@ -76,7 +76,7 @@ defmodule MongoosePushWeb.Schemas.Request.SendNotification.FlatNotification do
     end
 
     defp add_optional_alert_fields(push_request, schema) do
-      opt_alert_keys = [:badge, :click_action, :tag]
+      opt_alert_keys = [:badge, :click_action, :tag, :data]
 
       Enum.reduce(opt_alert_keys, push_request, fn x, acc ->
         case Map.get(schema, x) do

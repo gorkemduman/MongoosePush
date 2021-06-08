@@ -20,6 +20,7 @@ config :mongoose_push, MongoosePushWeb.Endpoint,
 
 config :mongoose_push, MongoosePush.Service,
   fcm: MongoosePush.Service.FCM,
+  hns: MongoosePush.Service.HNS,
   apns: MongoosePush.Service.APNS
 
 config :mongoose_push,

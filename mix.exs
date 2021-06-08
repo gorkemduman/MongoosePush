@@ -34,7 +34,7 @@ defmodule MongoosePush.Mixfile do
   defp deps do
     [
       {:chatterbox, github: "joedevivo/chatterbox", ref: "1f4ce4f", override: true},
-      {:sparrow, github: "esl/sparrow", ref: "1760502"},
+      {:sparrow, github: "gorkemduman/sparrow", ref: "fb50eb2"},
       {:plug_cowboy, "~> 2.0"},
       {:cowboy, "< 2.8.0", override: true},
       {:jason, "~> 1.0"},
@@ -107,7 +107,11 @@ defmodule MongoosePush.Mixfile do
           MongoosePush.Service.FCM,
           MongoosePush.Service.FCM.ErrorHandler,
           MongoosePush.Service.FCM.Pool.Supervisor,
-          MongoosePush.Service.FCM.Pools
+          MongoosePush.Service.FCM.Pools,
+          MongoosePush.Service.HNS,
+          MongoosePush.Service.HNS.ErrorHandler,
+          MongoosePush.Service.HNS.Pool.Supervisor,
+          MongoosePush.Service.HNS.Pools
         ],
         Web: [
           MongoosePushWeb,
